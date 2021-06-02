@@ -101,6 +101,7 @@ class Members extends PureComponent {
       connectRemoveCourseMember,
       connectRemoveRoomMember,
     } = this.props;
+    console.log('Removing ', info);
     if (resourceType === 'course') {
       connectRemoveCourseMember(resourceId, info.user._id);
     } else connectRemoveRoomMember(resourceId, info.user._id);

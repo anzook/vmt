@@ -393,6 +393,19 @@ module.exports = {
     });
   },
 
+  removeMember: (id, body) => {
+    console.log('Controller received id: ', id, ' with body: ', body);
+    return new Promise((resolve, reject) => {
+      db.User.findByIdAndUpdate(body.members.user, { $pull: { rooms: id } }); // @todo there is no error handling for this
+      db.Room.findByIdAndUpdate(id, { $pull: { members: body.members.user } })
+        .populate({ path: 'members.user', select: 'username' })
+        .then((res) => {
+          resolve(res.members);
+        })
+        .catch((err) => reject(err));
+    });
+  },
+
   // THIS IS A MESS @TODO CLEAN UP
   put: (id, body) => {
     return new Promise((resolve, reject) => {

@@ -115,7 +115,7 @@ export default {
   },
 
   removeMember: (resource, resourceId, user) => {
-    return api.put(`/api/${resource}/${resourceId}/remove`, {
+    return api.removeMember(`/api/${resource}/${resourceId}`, {
       members: { user },
     });
   },
