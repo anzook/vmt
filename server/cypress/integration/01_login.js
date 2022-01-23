@@ -12,6 +12,8 @@ describe('user signup/login', function() {
       cy.visit('/');
     });
   });
+  // TEST-NOTE: will fail due to duplicate key if enc db is not set to test/seeded!
+
   it('signs up a new user', function() {
     cy.visit('/');
     cy.contains('Signup').click();
