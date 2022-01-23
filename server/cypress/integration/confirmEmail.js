@@ -17,6 +17,7 @@ describe('Confirming Email', function() {
   xdescribe('Visiting unconfirmed page with already confirmed email', function() {
     const user = userConfirmed;
     const confirmUrl = `/confirmEmail/${userLiveToken.token}`;
+    // TEST-NOTE: will fail if Enc user is not also created and able for MT-SSO to confirm
     const successMsg = `${userLiveToken.email} has been successfully confirmed`;
     const logoutPrompt = `Click Log Out below if you would like to log in to the account
       associated with ${userLiveToken.email};
