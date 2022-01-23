@@ -134,7 +134,7 @@ function createResource(details) {
       }
       if (ggbFileName) {
         cy.fixture(ggbFileName, 'base64').then((fileContent) => {
-          cy.get('input[name=ggbFile]').upload({
+          cy.get('input[name=ggbFile]').attachFile({
             fileContent,
             ggbFileName,
             mimeType: 'application/zip',
@@ -320,7 +320,7 @@ describe('create each type of resource', function() {
 
     const fileName = 'ggbFiles/list-of-functions.ggb';
     cy.fixture(fileName, 'base64').then((fileContent) => {
-      cy.get('input[name=ggbFile]').upload({
+      cy.get('input[name=ggbFile]').attachFile({
         fileContent,
         fileName,
         mimeType: 'application/zip',
@@ -339,10 +339,13 @@ describe('create each type of resource', function() {
       // go in to room and make sure the file loads
       cy.contains(roomName).click();
       cy.contains('Enter').click();
+      cy.wait(5000); // additional loading time for room
 
       // check that the file loaded
       // not sure of best way to do this
-      const selector = 'div.applet_scaler > article.notranslate';
+      // const selector = 'div.applet_scaler > article.notranslate';
+      // alternate selector
+      const selector = '.EuclidianPanel > canvas';
 
       cy.get(selector).then(($el) => {
         expect($el.length).to.eql(1);
