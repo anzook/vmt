@@ -33,7 +33,7 @@ import { updateUser } from '../store/actions/user';
 class Home extends PureComponent {
   state = {
     scrollPosition: 0,
-    errorMsgSeen: false,
+    errorMsgSeen: process.env.NODE_ENV !== 'test' ? true : false, // do not show the modal in test
   };
 
   componentDidMount() {
@@ -73,6 +73,7 @@ class Home extends PureComponent {
   render() {
     const { location, user } = this.props;
     const { scrollPosition, errorMsgSeen } = this.state;
+    console.log('');
     return (
       <Aux>
         {location.pathname.indexOf('community') > -1 ||
